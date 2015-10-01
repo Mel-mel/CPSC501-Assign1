@@ -19,14 +19,39 @@ import java.io.*;
 
 public class Driver
 {
+	private static FileReader fr = null;
+    private static BufferedReader br = null;
+    private static String filename = null;
+    private static String lineFromFile = null;
+    private static boolean finished = false;
+
+	
+	public static void readFromFile() throws Exception
+	{
+		fr = new FileReader(filename);
+        br = new BufferedReader(fr);
+        lineFromFile = br.readLine();
+
+        // JT: Empty input file
+        if (lineFromFile == null)
+        {
+            System.out.println("Empty input file: no guesses to play with");
+            finished = true;
+        }
+	}
+	
+	public static void printBanner()
+	{
+		//This is the my banner.
+		System.out.println("Last Name: Ta");
+		System.out.println("First Name: Melissa");
+		System.out.println("Student ID: 10110850");
+		System.out.println("Course: CPSC 233");
+		System.out.println("Tutorial Section: 05");
+		System.out.println("Assignment: 2");
+	}
     public static void main(String [] args) throws Exception
     {
-        FileReader fr = null;
-        BufferedReader br = null;
-        String filename = null;
-        String lineFromFile = null;
-        boolean finished = false;
-    
         // JT: The first and only input to the program (after name of Java 
         // file) must be the name of the input file. 
         // the 
@@ -35,24 +60,9 @@ public class Driver
         else
         {
             filename = args[0];
-            fr = new FileReader(filename);
-            br = new BufferedReader(fr);
-            lineFromFile = br.readLine();
-
-            // JT: Empty input file
-            if (lineFromFile == null)
-            {
-                System.out.println("Empty input file: no guesses to play with");
-                finished = true;
-            }
-            else{
-		//This is the my banner.
-		System.out.println("Last Name: Ta");
-		System.out.println("First Name: Melissa");
-		System.out.println("Student ID: 10110850");
-		System.out.println("Course: CPSC 233");
-		System.out.println("Tutorial Section: 05");
-		System.out.println("Assignment: 2");
+            readFromFile();
+		
+			printBanner();
 		
 		//This is to extract the components for the rectangle.
 		String aLine = lineFromFile;
@@ -102,7 +112,7 @@ public class Driver
 		//Displays the results for the drawings.
 		Draw some_results = new Draw();
 		some_results.showResults(SHAPE_TYPE_RECT, SHAPE_TYPE_LEFTTRI, SHAPE_TYPE_RIGHTTRI);
-            }
+            
         }
     }
 }
