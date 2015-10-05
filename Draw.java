@@ -12,7 +12,7 @@ public class Draw{
         public int height;
     
     //This is the method that draws the rectangle.
-	public void drawRectangle(char appearance, int width, int height){
+	public void drawRectangle(String appearance, int width, int height){
 	    height = height + 1;
 	    width = width + 1;
 	    //This loop draws the rectangle.
@@ -27,7 +27,7 @@ public class Draw{
 	}
 
     //This is the method that draws the Left Triangle.
-	public void drawLeftTriangle(char appearance, int size){
+	public void drawLeftTriangle(String appearance, int size){
 	    height = size;
 	    width = size + 1;
 	    //This loop draws the left triangle. It also decrements the width to make the triangle more distinct.
@@ -45,7 +45,7 @@ public class Draw{
 
 	}
     //This method draws the Right Triangle. This loop only draws a rectangle at the moment. Was not able to draw the right triangle properly.
-	public void drawRightTriangle(char appearance, int size){
+	public void drawRightTriangle(String appearance, int size){
 	    width = size;
 	    height = size;
 	    for(int s = 0; s < height; s++){
