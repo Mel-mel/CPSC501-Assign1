@@ -25,21 +25,101 @@ public class Driver
     private static String lineFromFile = null;
     private static boolean finished = false;
 
-	
-	public static void readFromFile() throws Exception
-	{
-		fr = new FileReader(filename);
-        br = new BufferedReader(fr);
-        lineFromFile = br.readLine();
-
-        // JT: Empty input file
-        if (lineFromFile == null)
-        {
-            System.out.println("Empty input file: no guesses to play with");
-            finished = true;
+    private static String appearanceStringRect;
+    private static String appearanceLeftTri;
+    private static String appearanceRightTri;
+    
+    private static int height, width, triSize;
+    
+    private static char appearanceRect, appearanceLTri, appearanceRTri;
+    public static void main(String [] args) throws Exception
+    {
+    	readFromFile(args);
+    	extractRectContent();
+		extractRightTriContent();
+		extractLeftTriContent();
+		
+		
+				
+		
+		
+     	
+				
+		//Creates new rectangle object.		
+		Draw aRectangle = new Draw();
+		aRectangle.drawRectangle(appearanceRect, width, height);
+        //Create new Left triangle object.
+        Draw aLeftTri = new Draw();
+        aLeftTri.drawLeftTriangle(appearanceLeftTri, size_Left_Tri);
+        //Creates new Right triangle object.
+		Draw aRightTri = new Draw();
+		aRightTri.drawRightTriangle(appearanceRightTri, size_right_tri);
+		//Displays the results for the drawings.
+		Draw some_results = new Draw();
+		//some_results.showResults(SHAPE_TYPE_RECT, SHAPE_TYPE_LEFTTRI, SHAPE_TYPE_RIGHTTRI);
+            
         }
+    
+    //This is to extract the components for the rectangle.
+    public static void extractRectContent()
+    {
+    	
+		appearanceStringRect = lineFromFile.substring(2, 4);
+		
+		String strHeight = lineFromFile.substring(3, 4);
+		String strWidth = lineFromFile.substring(4);
+		height = Integer.parseInt(strHeight);//Converts height into an integer.
+		width = Integer.parseInt(strWidth);//Converts the width into an integer.
+		appearanceRect = appearanceStringRect.charAt(0);//Converts the appearance to a character.
+		//final String SHAPE_TYPE_RECT = lineFromFile.substring(0, 2);
+    }
+    
+    //This is to extract the components for the Left Triangle.
+    public static void extractLeftTriContent()
+    {
+    	
+		appearanceLeftTri = lineFromFile.substring(2, 4);
+		String strSize = lineFromFile.substring(3, 4);
+		triSize = Integer.parseInt(strSize);//Converts variable to an integer.
+		appearanceLTri = appearanceLeftTri.charAt(0);//Converts to the variable to a character.
+		//final String SHAPE_TYPE_LEFTTRI= lineFromFile.substring(0, 2);
+    					
+    }
+    
+    //This is to extract the component for the Right Triangle.
+    public static void extractRightTriContent()
+    {
+    	appearanceRightTri = lineFromFile.substring(2, 4);
+		String strSize = lineFromFile.substring(3, 4);
+		triSize = Integer.parseInt(strSize);//Converts variable to an integer.
+		appearanceRTri = appearanceRightTri.charAt(0);//Converts to the variable to a character.
+		final String SHAPE_TYPE_RIGHTTRI = aLine2.substring(0, 2);
+    }
+    
+	public static void readFromFile(String [] args) throws Exception
+	{
+		// JT: The first and only input to the program (after name of Java 
+	    // file) must be the name of the input file. 
+	    // the 
+	    if (args.length != 1)
+	        System.out.println("Usage:java Guessing <name of input file>");
+	    else
+	    {
+	        filename = args[0];
+			printBanner();
+		
+			fr = new FileReader(filename);
+		    br = new BufferedReader(fr);
+		    lineFromFile = br.readLine();
+		
+		    // JT: Empty input file
+		    if (lineFromFile == null)
+		    {
+		        System.out.println("Empty input file: no guesses to play with");
+		        finished = true;
+		    }
+	    }
 	}
-	
 	public static void printBanner()
 	{
 		//This is the my banner.
@@ -50,69 +130,4 @@ public class Driver
 		System.out.println("Tutorial Section: 05");
 		System.out.println("Assignment: 2");
 	}
-    public static void main(String [] args) throws Exception
-    {
-        // JT: The first and only input to the program (after name of Java 
-        // file) must be the name of the input file. 
-        // the 
-        if (args.length != 1)
-            System.out.println("Usage:java Guessing <name of input file>");
-        else
-        {
-            filename = args[0];
-            readFromFile();
-		
-			printBanner();
-		
-		//This is to extract the components for the rectangle.
-		String aLine = lineFromFile;
-		String appearanceStringRect = "a";
-		appearanceStringRect = aLine.substring(2, 4);
-		String heightStringRect = aLine.substring(3, 4);
-		String widthStringRect = aLine.substring(4);
-		int height = Integer.parseInt(heightStringRect);//Converts height into an integer.
-		int width = Integer.parseInt(widthStringRect);//Converts the width into an integer.
-		char appearanceRect = appearanceStringRect.charAt(0);//Converts the appearance to a character.
-		final String SHAPE_TYPE_RECT = aLine.substring(0, 2);
-		lineFromFile = br.readLine();
-				
-		//This is to extract the components for the Left Triangle.
-		String aLine2 = lineFromFile;
-		String appearanceStringLeftTri = "l";
-		appearanceStringLeftTri = aLine2.substring(2, 4);
-		String sizeStringLeftTri = aLine2.substring(3, 4);
-		int size_Left_Tri = Integer.parseInt(sizeStringLeftTri);//Converts variable to an integer.
-		char appearanceLeftTri = appearanceStringLeftTri.charAt(0);//Converts to the variable to a character.
-		final String SHAPE_TYPE_LEFTTRI= aLine2.substring(0, 2);
-		//System.out.println(shape_type_LeftTri);
-		//System.out.println(sizeStringLeftTri);
-		lineFromFile = br.readLine();
-				
-		//This is to extract the component for the Right Triangle.
-     		String aLine3 = lineFromFile;
-		String appearanceStringRightTri = "r";
-		appearanceStringRightTri = aLine3.substring(2, 4);
-		String sizeStringRightTri = aLine3.substring(3, 4);
-		int size_right_tri = Integer.parseInt(sizeStringRightTri);//Converts the size into an integer.
-		char appearanceRightTri = appearanceStringRightTri.charAt(0);//Converts the appearance into a character.
-		final String SHAPE_TYPE_RIGHTTRI = aLine2.substring(0, 2);
-		//System.out.println(shape_type_RightTri);
-		//System.out.println(sizeStringRightTri);
-		lineFromFile = br.readLine();
-				
-		//Creates new rectangle object.		
-		Draw aRectangle = new Draw();
-		aRectangle.drawRectangle(appearanceRect, width, height);
-                //Create new Left triangle object.
-                Draw aLeftTri = new Draw();
-                aLeftTri.drawLeftTriangle(appearanceLeftTri, size_Left_Tri);
-                //Creates new Right triangle object.
-		Draw aRightTri = new Draw();
-		aRightTri.drawRightTriangle(appearanceRightTri, size_right_tri);
-		//Displays the results for the drawings.
-		Draw some_results = new Draw();
-		some_results.showResults(SHAPE_TYPE_RECT, SHAPE_TYPE_LEFTTRI, SHAPE_TYPE_RIGHTTRI);
-            
-        }
-    }
 }
