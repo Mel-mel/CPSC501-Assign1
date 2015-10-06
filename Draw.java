@@ -7,12 +7,19 @@
 
 public class Draw{
     //Attributes of the class Draw.
-	public char appearance;
-	public int width;
-        public int height;
+	private String appearance;
+	private int width;
+	private int height;
     
+	public Draw(int w, int h, String a)
+	{
+		width = w;
+		height = h;
+		appearance = a;
+	}
+	
     //This is the method that draws the rectangle.
-	public void drawRectangle(String appearance, int width, int height){
+	public void drawRectangle(){
 	    height = height + 1;
 	    width = width + 1;
 	    //This loop draws the rectangle.
@@ -27,38 +34,36 @@ public class Draw{
 	}
 
     //This is the method that draws the Left Triangle.
-	public void drawLeftTriangle(String appearance, int size){
-	    height = size;
-	    width = size + 1;
+	public void drawLeftTriangle(){
 	    //This loop draws the left triangle. It also decrements the width to make the triangle more distinct.
-	    for(int j = 0; j < height; j++){
-		for(int k = 0; k < width; k++){
-		    System.out.print(appearance);
-		    width--;//Decreases width.
-		    System.out.print("");
-		    }
-		
-		System.out.println("");
+	    for(int j = 0; j < height; j++)
+	    {
+	    	for(int k = 0; k < width; k++)
+	    	{
+			    System.out.print(appearance);
+			    
+			    System.out.print("");
+			}
+			width--;//Decreases width.
+			System.out.println("");
 		}
-
-            System.out.println("");
-
+	    System.out.println("");
 	}
     //This method draws the Right Triangle. This loop only draws a rectangle at the moment. Was not able to draw the right triangle properly.
-	public void drawRightTriangle(String appearance, int size){
-	    width = size;
-	    height = size;
-	    for(int s = 0; s < height; s++){
-		for(int r = 0; r < width; r++){
-		    System.out.print(appearance);
-		    size--;
-		    
-		    System.out.print("");
-		}
-		System.out.println("");
+	public void drawRightTriangle(){
+	    for(int i = 0; i < height; i++)
+	    {
+	    	for(int j = 0; j < width - 1; j++)
+	    	{
+	    		System.out.print(" ");
+	    	}
+	    	width--;
+	    	for(int k = height; k > width; k--)
+	    	{
+	    		System.out.print(appearance);
+	    	}
+	    	System.out.println("");
 	    }
-	    System.out.print("");
-
 	}
     //This method prints the final results after the program is finished drawing.
         public void showResults(final String SHAPE_TYPE_RECT, final String SHAPE_TYPE_LEFTTRI, final String SHAPE_TYPE_RIGHTTRI){

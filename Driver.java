@@ -21,40 +21,31 @@ public class Driver
 {
 	private static FileReader fr = null;
     private static BufferedReader br = null;
-    private static String filename = null;
-    private static String lineFromFile = null;
+    private static String filename, lineFromFile;
     private static boolean finished = false;
 
-    private static String rectangleStr;
-
-    private static String triangleStr;
-    
-    private static String strHeight, strWidth;
-    
+    private static String rectangleStr, triangleStr, stringFromLine;
     private static int height, width, triSize;
     
-    private static char appearanceRect, appearanceLTri, appearanceRTri;
+    private static Draw aRectangle, leftTri, rightTri;
+    
     public static void main(String [] args) throws Exception
     {
-    	//Need to put this into Draw class.
     	readFromFile(args);
     	extractRectContent();
-    	extractTriContent();
-    	extractTriContent();
-		//extractRightTriContent();
-		//extractLeftTriContent();
+    	aRectangle = new Draw(width, height, rectangleStr);
+		aRectangle.drawRectangle();
 		
-		//Creates new rectangle object.		
-		Draw aRectangle = new Draw();
-		aRectangle.drawRectangle(rectangleStr, width, height);
-        //Create new Left triangle object.
-        Draw aLeftTri = new Draw();
-        aLeftTri.drawLeftTriangle(triangleStr, triSize);
-        //Creates new Right triangle object.
-		Draw aRightTri = new Draw();
-		aRightTri.drawRightTriangle(triangleStr, triSize);
+    	extractTriContent();
+    	leftTri = new Draw(triSize, triSize, triangleStr);
+        leftTri.drawLeftTriangle();
+        
+    	extractTriContent();
+    	rightTri = new Draw(triSize, triSize, triangleStr);
+		rightTri.drawRightTriangle();
+
 		//Displays the results for the drawings.
-		Draw some_results = new Draw();
+		//Draw some_results = new Draw();
 		//some_results.showResults(SHAPE_TYPE_RECT, SHAPE_TYPE_LEFTTRI, SHAPE_TYPE_RIGHTTRI);
             
         }
@@ -62,51 +53,27 @@ public class Driver
     //This is to extract the components for the rectangle.
     public static void extractRectContent() throws IOException
     {
-    	
 		rectangleStr = lineFromFile.substring(2, 3);
-		strHeight = lineFromFile.substring(3, 4);
-		strWidth = lineFromFile.substring(4);
-		height = Integer.parseInt(strHeight);//Converts height into an integer.
-		width = Integer.parseInt(strWidth);//Converts the width into an integer.
+		stringFromLine = lineFromFile.substring(3, 4);
+		height = Integer.parseInt(stringFromLine);
+		stringFromLine = lineFromFile.substring(4);
+		width = Integer.parseInt(stringFromLine);//Converts the width into an integer.
 		lineFromFile = br.readLine();
 		//final String SHAPE_TYPE_RECT = lineFromFile.substring(0, 2);
     }
-    /*
-    //This is to extract the components for the Left Triangle.
-    public static void extractLeftTriContent()
-    {
-    	
-		appearanceLeftTri = lineFromFile.substring(2, 4);
-		String strSize = lineFromFile.substring(3, 4);
-		triSize = Integer.parseInt(strSize);//Converts variable to an integer.
-		appearanceLTri = appearanceLeftTri.charAt(0);//Converts to the variable to a character.
-		//final String SHAPE_TYPE_LEFTTRI= lineFromFile.substring(0, 2);
-    					
-    }
-    
-    //This is to extract the component for the Right Triangle.
-    public static void extractRightTriContent()
-    {
-    	appearanceRightTri = lineFromFile.substring(2, 4);
-		String strSize = lineFromFile.substring(3, 4);
-		triSize = Integer.parseInt(strSize);//Converts variable to an integer.
-		appearanceRTri = appearanceRightTri.charAt(0);//Converts to the variable to a character.
-		//final String SHAPE_TYPE_RIGHTTRI = aLine2.substring(0, 2);
-    }*/
     
     public static void extractTriContent() throws IOException
     {
     	triangleStr = lineFromFile.substring(2, 3);
-    	String strSize = lineFromFile.substring(3, 4);
-    	triSize = Integer.parseInt(strSize);
+    	stringFromLine = lineFromFile.substring(3, 4);
+    	triSize = Integer.parseInt(stringFromLine);
     	lineFromFile = br.readLine();
     }
     
+    // JT: The first and only input to the program (after name of Java 
+	// file) must be the name of the input file.
 	public static void readFromFile(String [] args) throws Exception
 	{
-		// JT: The first and only input to the program (after name of Java 
-	    // file) must be the name of the input file. 
-	    // the 
 	    if (args.length != 1)
 	        System.out.println("Usage:java Guessing <name of input file>");
 	    else
@@ -126,9 +93,11 @@ public class Driver
 		    }
 	    }
 	}
+	
+	//This is the my banner.
 	public static void printBanner()
 	{
-		//This is the my banner.
+	
 		System.out.println("Last Name: Ta");
 		System.out.println("First Name: Melissa");
 		System.out.println("Student ID: 10110850");
