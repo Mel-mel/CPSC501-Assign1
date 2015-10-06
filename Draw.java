@@ -6,26 +6,18 @@
 //Assignment: 2
 
 public class Draw{
-    //Attributes of the class Draw.
-	private String appearance;
-	private int width;
-	private int height;
-    
-	public Draw(int w, int h, String a)
-	{
-		width = w;
-		height = h;
-		appearance = a;
-	}
+ 
+	private static int width;
+	private static int height;
 	
     //This is the method that draws the rectangle.
-	public void drawRectangle(){
-	    height = height + 1;
-	    width = width + 1;
+	public void drawRectangle(Shapes rectangle){
+	    height = rectangle.getHeight() + 1;
+	    width = rectangle.getWidth() + 1;
 	    //This loop draws the rectangle.
 	    for(int p = 1; p < height; p++){
 		for (int q = 1; q < width; q++){
-		    System.out.print(appearance);
+		    System.out.print(rectangle.getAppearance());
 		}
 		System.out.println("");
 	    }
@@ -34,13 +26,15 @@ public class Draw{
 	}
 
     //This is the method that draws the Left Triangle.
-	public void drawLeftTriangle(){
+	public void drawLeftTriangle(Shapes leftTri){
+		height = leftTri.getHeight();
+		width = leftTri.getWidth();
 	    //This loop draws the left triangle. It also decrements the width to make the triangle more distinct.
 	    for(int j = 0; j < height; j++)
 	    {
 	    	for(int k = 0; k < width; k++)
 	    	{
-			    System.out.print(appearance);
+			    System.out.print(leftTri.getAppearance());
 			    
 			    System.out.print("");
 			}
@@ -50,7 +44,9 @@ public class Draw{
 	    System.out.println("");
 	}
     //This method draws the Right Triangle. This loop only draws a rectangle at the moment. Was not able to draw the right triangle properly.
-	public void drawRightTriangle(){
+	public void drawRightTriangle(Shapes rightTri){
+		height = rightTri.getHeight();
+		width = rightTri.getWidth();
 	    for(int i = 0; i < height; i++)
 	    {
 	    	for(int j = 0; j < width - 1; j++)
@@ -60,7 +56,7 @@ public class Draw{
 	    	width--;
 	    	for(int k = height; k > width; k--)
 	    	{
-	    		System.out.print(appearance);
+	    		System.out.print(rightTri.getAppearance());
 	    	}
 	    	System.out.println("");
 	    }
