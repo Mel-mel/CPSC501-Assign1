@@ -21,31 +21,28 @@ public class Driver
 {
 	private static FileReader fr = null;
     private static BufferedReader br = null;
-    private static String filename = null;
-    private static String lineFromFile = null;
-
+    private static String filename, lineFromFile;
     private static boolean finished = false;
 
     private static String rectangleStr, triangleStr, stringFromLine;
     private static int height, width, triSize;
     
-    private static Shapes aRectangle, leftTri, rightTri;
-    private static Draw drawShape = new Draw();
+    private static Draw aRectangle, leftTri, rightTri;
     
     public static void main(String [] args) throws Exception
     {
     	readFromFile(args);
     	extractRectContent();
-    	aRectangle = new Shapes(width, height, rectangleStr);
-		drawShape.drawRectangle(aRectangle);
+    	aRectangle = new Draw(width, height, rectangleStr);
+		aRectangle.drawRectangle();
 		
     	extractTriContent();
-    	leftTri = new Shapes(triSize, triSize, triangleStr);
-        drawShape.drawLeftTriangle(leftTri);
+    	leftTri = new Draw(triSize, triSize, triangleStr);
+        leftTri.drawLeftTriangle();
         
     	extractTriContent();
-    	rightTri = new Shapes(triSize, triSize, triangleStr);
-		drawShape.drawRightTriangle(rightTri);
+    	rightTri = new Draw(triSize, triSize, triangleStr);
+		rightTri.drawRightTriangle();
 
 		//Displays the results for the drawings.
 		//Draw some_results = new Draw();
